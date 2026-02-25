@@ -145,3 +145,4 @@ C:\Users\Глеб\Desktop\SPP.Serever\SPP.Serever\obj\Debug\net8.0\refint\SPP.Se
 C:\Users\Глеб\Desktop\SPP.Serever\SPP.Serever\obj\Debug\net8.0\SPP.Serever.pdb
 C:\Users\Глеб\Desktop\SPP.Serever\SPP.Serever\obj\Debug\net8.0\SPP.Serever.genruntimeconfig.cache
 C:\Users\Глеб\Desktop\SPP.Serever\SPP.Serever\obj\Debug\net8.0\ref\SPP.Serever.dll
+C:\Users\Глеб\Desktop\SPP.Serever\SPP.Serever\obj\Debug\net8.0\SPP.Serever.sourcelink.json

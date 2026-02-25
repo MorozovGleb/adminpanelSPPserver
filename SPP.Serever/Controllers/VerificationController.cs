@@ -60,6 +60,38 @@ public class VerificationController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+    /// <summary>
+    /// Returning all verifications with their confirmation status for a specific user.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<IActionResult> A()
+    {
+        try
+        {
+            return Ok(await _context.Verifications
+            .ToListAsync());
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+    [HttpPost]
+    public IActionResult Create([FromBody] ConfirmationVerification  c)
+    {
+        try
+        {
+            _context.ConfirmationVerifications.Add(c);
+            _context.SaveChanges();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateVerification(int ID, [FromBody] ConfirmationVerification dto)
     {

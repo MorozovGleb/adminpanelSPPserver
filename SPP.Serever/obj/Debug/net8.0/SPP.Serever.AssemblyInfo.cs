@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SPP.Serever")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+209f262d5d4e3cfc1c528e9e62ce2a052bb0b5c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SPP.Serever")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SPP.Serever")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
