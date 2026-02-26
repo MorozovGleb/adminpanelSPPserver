@@ -36,7 +36,7 @@
         }
       }
     },
-    "/api/Chat/SaveMessage": {
+    "/api/Chat": {
       "post": {
         "tags": [
           "Chat"
@@ -45,17 +45,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChatMessageModel"
+                "$ref": "#/components/schemas/ChatRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChatMessageModel"
+                "$ref": "#/components/schemas/ChatRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ChatMessageModel"
+                "$ref": "#/components/schemas/ChatRequest"
               }
             }
           }
@@ -63,55 +63,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Chat/GetMessages/{sessionId}": {
-      "get": {
-        "tags": [
-          "Chat"
-        ],
-        "parameters": [
-          {
-            "name": "sessionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ChatMessageModel"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ChatMessageModel"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ChatMessageModel"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -431,28 +382,12 @@
   },
   "components": {
     "schemas": {
-      "ChatMessageModel": {
+      "ChatRequest": {
         "type": "object",
         "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "SessionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "Role": {
+          "Message": {
             "type": "string",
             "nullable": true
-          },
-          "Content": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false

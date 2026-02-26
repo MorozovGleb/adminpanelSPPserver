@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
+﻿
 using SPP.Serever.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+
 
 namespace SPP.Server.Controllers
 {
@@ -11,57 +12,70 @@ namespace SPP.Server.Controllers
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
     {
-        private readonly string _connectionString =
-            "Server=DESKTOP-20TGD0H\\\\SQLEXPRESS;Database=SPP_V4;User Id=spp_user;Password=SppStrong_123!;TrustServerCertificate=True;";
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        [HttpPost("SaveMessage")]
-        public async Task<IActionResult> SaveMessage([FromBody] ChatMessageModel message)
+        public ChatController(IHttpClientFactory factory, IConfiguration configuration)
         {
-            using var connection = new SqlConnection(_connectionString);
-            await connection.OpenAsync();
-
-            var command = new SqlCommand(@"
-                INSERT INTO ChatMessage (SessionId, Role, Content)
-                VALUES (@SessionId, @Role, @Content)", connection);
-
-            command.Parameters.AddWithValue("@SessionId", message.SessionId);
-            command.Parameters.AddWithValue("@Role", message.Role);
-            command.Parameters.AddWithValue("@Content", message.Content);
-
-            await command.ExecuteNonQueryAsync();
-
-            return Ok();
+            _httpClient = factory.CreateClient();
+            _configuration = configuration;
         }
 
-        [HttpGet("GetMessages/{sessionId}")]
-        public async Task<List<ChatMessageModel>> GetMessages(Guid sessionId)
+        [HttpPost]
+        public async Task<IActionResult> Ask([FromBody] ChatRequest request)
         {
-            var list = new List<ChatMessageModel>();
-            using var connection = new SqlConnection(_connectionString);
-            await connection.OpenAsync();
+            var apiKey = _configuration["YandexGPT:ApiKey"];
+            var folderId = _configuration["YandexGPT:FolderId"];
 
-            var command = new SqlCommand(@"
-                SELECT Id, SessionId, Role, Content, CreatedAt
-                FROM ChatMessage
-                WHERE SessionId = @SessionId
-                ORDER BY CreatedAt", connection);
-
-            command.Parameters.AddWithValue("@SessionId", sessionId);
-
-            using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
+            var requestBody = new
             {
-                list.Add(new ChatMessageModel
+                modelUri = $"gpt://{folderId}/yandexgpt-lite",
+                completionOptions = new
                 {
-                    Id = reader.GetInt32(0),
-                    SessionId = reader.GetGuid(1),
-                    Role = reader.GetString(2),
-                    Content = reader.GetString(3),
-                    CreatedAt = reader.GetDateTime(4)
-                });
-            }
+                    stream = false,
+                    temperature = 0.6,
+                    maxTokens = 1000
+                },
+                messages = new[]
+                {
+                    new
+                    {
+                        role = "user",
+                        text = request.Message
+                    }
+                }
+            };
 
-            return list;
+            var json = JsonSerializer.Serialize(requestBody);
+
+            var httpRequest = new HttpRequestMessage(
+                HttpMethod.Post,
+                "https://llm.api.cloud.yandex.net/foundationModels/v1/completion");
+
+            httpRequest.Headers.Authorization =
+                new AuthenticationHeaderValue("Api-Key", apiKey);
+
+            httpRequest.Content = new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.SendAsync(httpRequest);
+            var responseJson = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                return BadRequest(responseJson);
+
+            using JsonDocument doc = JsonDocument.Parse(responseJson);
+
+            string answer = doc.RootElement
+                .GetProperty("result")
+                .GetProperty("alternatives")[0]
+                .GetProperty("message")
+                .GetProperty("text")
+                .GetString();
+
+            return Ok(answer);
         }
     }
 }

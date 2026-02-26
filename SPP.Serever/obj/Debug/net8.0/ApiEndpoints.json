@@ -17,41 +17,15 @@
   },
   {
     "ContainingType": "SPP.Server.Controllers.ChatController",
-    "Method": "GetMessages",
-    "RelativePath": "api/Chat/GetMessages/{sessionId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "sessionId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[SPP.Serever.Models.ChatMessageModel, SPP.Serever, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "SPP.Server.Controllers.ChatController",
-    "Method": "SaveMessage",
-    "RelativePath": "api/Chat/SaveMessage",
+    "Method": "Ask",
+    "RelativePath": "api/Chat",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "message",
-        "Type": "SPP.Serever.Models.ChatMessageModel",
+        "Name": "request",
+        "Type": "SPP.Serever.Models.ChatRequest",
         "IsRequired": true
       }
     ],
