@@ -166,53 +166,11 @@
         }
       }
     },
-    "/api/schedule/user/{userId}": {
+    "/api/Schedule/stream": {
       "get": {
         "tags": [
           "Schedule"
         ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/schedule": {
-      "post": {
-        "tags": [
-          "Schedule"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Schedule"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Schedule"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Schedule"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -438,35 +396,6 @@
           "Name": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Schedule": {
-        "type": "object",
-        "properties": {
-          "ID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ID_User": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "User": {
-            "$ref": "#/components/schemas/User"
-          },
-          "_Date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "_Start": {
-            "type": "string",
-            "format": "date-span"
-          },
-          "_End": {
-            "type": "string",
-            "format": "date-span"
           }
         },
         "additionalProperties": false

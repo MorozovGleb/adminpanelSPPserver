@@ -100,36 +100,20 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ScheduleController",
-    "Method": "Create",
-    "RelativePath": "api/schedule",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "SPP.Serever.Models.Schedule",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ScheduleController",
-    "Method": "GetUserSchedule",
-    "RelativePath": "api/schedule/user/{userId}",
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "StreamSchedule",
+    "RelativePath": "api/Schedule/stream",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
+    "Parameters": [],
+    "ReturnTypes": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   },
   {
     "ContainingType": "SPP.Serever.Controllers.UsersController",
