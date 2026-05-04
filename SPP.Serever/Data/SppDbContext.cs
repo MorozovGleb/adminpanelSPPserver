@@ -7,8 +7,12 @@ public class SppDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
-    public DbSet<Schedule> Schedule { get; set; }
     public DbSet<Verification> Verifications { get; set; }
+    public DbSet<Code> Codes { get; set; }
     public DbSet<ConfirmationVerification> ConfirmationVerifications { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
+    public DbSet<Day> Days { get; set; }
+    public DbSet<WordTimeReady> WordTimeReadies { get; set; }
     public DbSet<Learning> Learning { get; set; }
 }
+

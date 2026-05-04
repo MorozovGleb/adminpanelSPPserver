@@ -101,19 +101,101 @@
   },
   {
     "ContainingType": "SPP.Serever.Controllers.ScheduleController",
-    "Method": "StreamSchedule",
-    "RelativePath": "api/Schedule/stream",
+    "Method": "Clear",
+    "RelativePath": "api/Schedule/clear",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "Debug",
+    "RelativePath": "api/Schedule/debug",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "GetExisting",
+    "RelativePath": "api/Schedule/existing",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
+        "Name": "fromDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "Generate",
+    "RelativePath": "api/Schedule/generate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SPP.Serever.Controllers.GenerateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "Ping",
+    "RelativePath": "api/Schedule/ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "GetPreferences",
+    "RelativePath": "api/Schedule/preferences",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SPP.Serever.Controllers.ScheduleController",
+    "Method": "Status",
+    "RelativePath": "api/Schedule/status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "SPP.Serever.Controllers.UsersController",

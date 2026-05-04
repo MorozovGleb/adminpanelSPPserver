@@ -21,6 +21,7 @@ public class ScheduleRepository
 
         await connection.OpenAsync();
 
+
         string sql = @"
        SELECT 
     u.ID AS WorkerId,

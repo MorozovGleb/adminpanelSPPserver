@@ -9,5 +9,6 @@
         public string Position { get; set; }
 
         public string Code { get; set; }
+        public virtual WordTimeReady? WordTimeReady { get; set; }
     }
 }
